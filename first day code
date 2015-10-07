@@ -24,3 +24,7 @@ extractResTable=
     return(els)
   }
 m2012=extractResTable(url)
+identical(m2012,els)
+ubase= "http://www.cherryblossom.org/"
+urls= paste(ubase, "results/", 1999:2012, "/", 1999:2012, "cucb10m=m.htm", sep="")
+
