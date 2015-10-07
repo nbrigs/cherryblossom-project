@@ -1,0 +1,10 @@
+# cherryblossom-project
+library(XML)
+ubase="http://www.cherryblossom.org/" #to load website
+doc = htmlParse(url) #loading page of html
+preNode= getNodeSet(doc, "//pre") #to list of 1 pre
+txt = xmlValue(preNode[[1]]) #
+nchar(txt)
+substr(txt, 1,50)
+substr(txt, nchar(txt)- 50, nchar(txt))
+els= strsplit(txt, "\\r\\n")[[1]]
