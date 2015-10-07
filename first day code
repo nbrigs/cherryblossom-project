@@ -8,3 +8,19 @@ nchar(txt)
 substr(txt, 1,50)
 substr(txt, nchar(txt)- 50, nchar(txt))
 els= strsplit(txt, "\\r\\n")[[1]]
+length(els)
+els[1:3]
+els[length(els)]
+
+
+extractResTable= 
+  function(url)
+  {
+    doc=htmlParse(url)
+    preNode=getNodeSet(doc, "//pre")
+    txt=xmlValue(preNode[[1]]) 
+    els=strsplit(txt,"\r\n")[[1]] 
+    
+    return(els)
+  }
+m2012=extractResTable(url)
