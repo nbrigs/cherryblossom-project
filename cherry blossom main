@@ -46,4 +46,8 @@ menURLs = c("cb99m.htm", "cb003m.htm", "results/2001/oof_m.html",
             )
 
 urls= paste(ubase, menURLs, sep = "")
+urls[1:3]
+menTables = lapply(urls, extractResTable)
+names(menTables) = 1999:2012
+sapply(menTables, length)
 
