@@ -1,6 +1,6 @@
-# cherryblossom-project
 library(XML)
 ubase="http://www.cherryblossom.org/" #to load website
+url=paste(ubase, "results/2012/2012cucb10m-m.htm", sep="")
 doc = htmlParse(url) #loading page of html
 preNode= getNodeSet(doc, "//pre") #to list of 1 pre
 txt = xmlValue(preNode[[1]]) #
@@ -27,4 +27,11 @@ m2012=extractResTable(url)
 identical(m2012,els)
 ubase= "http://www.cherryblossom.org/"
 urls= paste(ubase, "results/", 1999:2012, "/", 1999:2012, "cucb10m=m.htm", sep="")
+menTables = lapply(urls, extractResTable)
+options(error = recover)
+menTables = lapply(urls, extractResTable)
+2
+ls ()
+url
+length(preNode)
 
