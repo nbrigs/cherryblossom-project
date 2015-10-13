@@ -51,7 +51,6 @@ menTables = lapply(urls, extractResTable)
 names(menTables) = 1999:2012
 sapply(menTables, length)
 
-#***********************************************************************
 extractResTable= 
   function(url, year = 1999)
   {
@@ -62,7 +61,7 @@ extractResTable=
       ff = getNodeSet(doc, "//font")
       txt = xmlValue(ff[[4]])
     }
-    els
+    else
     {
     preNode = getNodeSet(doc, "//pre")
     txt = xmlValue(preNode[[1]]) 
@@ -72,10 +71,9 @@ extractResTable=
     return(els)
   }
 
-
 years = 1999:2012
 menTables = mapply(extractResTable, url = urls, year = years)
 names(menTables) = years
 sapply(menTables, length)
-#**********************************************************************************
+
 save(menTables, file = "CBMenTextTables.rda") #to save data so the program does not have to keep scraping from website
