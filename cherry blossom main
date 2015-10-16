@@ -1,4 +1,6 @@
 library("XML", lib.loc="~/R/win-library/3.2")
+#2.7 start
+library(XML)
 ubase="http://www.cherryblossom.org/" #to load website
 url=paste(ubase, "results/2012/2012cucb10m-m.htm", sep="")
 doc = htmlParse(url) #loading page of html
@@ -12,6 +14,7 @@ length(els)
 els[1:3]
 els[length(els)]
 
+
 extractResTable= 
   function(url)
   {
@@ -22,19 +25,21 @@ extractResTable=
     
     return(els)
   }
+
 m2012=extractResTable(url)
 identical(m2012,els)
-ubase= "http://www.cherryblossom.org/"
-urls= paste(ubase, "results/", 1999:2012, "/", 1999:2012, "cucb10m=m.htm", sep="")
-menTables = lapply(urls, extractResTable)
+
+ubase= "http://www.cherryblossom.org/" # reason for split is because we are using different pages from same site
+mensURLs= paste(ubase, "results/", 1999:2012, "/", 1999:2012, "cucb10m=m.htm", sep="") # sep="" overides default of using space as seperator
+menTables = lapply(mensURLs, extractResTable)
 options(error = recover)
-menTables = lapply(urls, extractResTable)
+menTables = lapply(mensURLs, extractResTable)
 2
 ls ()
-url
+mensURLs
 length(preNode)
 Q
-menURLs = c("cb99m.htm", "cb003m.htm", "results/2001/oof_m.html",
+mensURLs = c("cb99m.htm", "cb003m.htm", "results/2001/oof_m.html",
             "results/2002/oofm.htm", "results/2003/CB03-M.HTM", 
             "results/2004/men.htm", "results/2005/CB05-M.htm",
             "results/2006/men.htm", "results/2007/men.htm",
@@ -44,9 +49,23 @@ menURLs = c("cb99m.htm", "cb003m.htm", "results/2001/oof_m.html",
             "results/2012/2012cucb10m-m.htm"
             )
 
-urls= paste(ubase, menURLs, sep = "")
-urls[1:3]
-menTables = lapply(urls, extractResTable)
+#*********************************************************************
+womensUrls= c("cb99f.htm", "cb003f.htm", 
+              "results/2001/oof_f.html", "results/2002/ooff.htm",
+              "results/2003/CB03-F.HTM", "results/2004/women.htm",
+              "results/2005/CB05-F.htm", "results/2006/women.htm",
+              "results/2007/women.htm", "results/2008/women.htm",
+              "results/2009/09cucb-F.htm", "results/2010/2010cucb10m-f.htm",
+              "results/2011/2011cucb10m-f.htm", "results/2012/2012cucb10m-f.htm"
+              )
+
+
+#*********************************************************************
+mensURLs= paste(ubase, mensURLs, sep = "")
+mensURLs[11] = "C:/Users/student/Desktop/Bryant School Work lenovo/semester 3/Applied analytics 304/cherry blossom/reworked data/mens_2009_notepad.htm"
+
+mensURLs[1:3]
+menTables = lapply(mensURLs, extractResTable)
 names(menTables) = 1999:2012
 sapply(menTables, length)
 
@@ -70,9 +89,14 @@ extractResTable=
     return(els)
   }
 
+
 years = 1999:2012
-menTables = mapply(extractResTable, url = urls, year = years)
+menTables = mapply(extractResTable, url= mensURLs, year= years)
 names(menTables) = years
 sapply(menTables, length)
 
 save(menTables, file = "CBMenTextTables.rda") #to save data so the program does not have to keep scraping from website
+
+getwd()
+
+
