@@ -1,0 +1,44 @@
+library("XML", lib.loc="~/R/win-library/3.2")
+#2.7 start
+library(XML)
+
+extractResTable= 
+  function(url)
+  {
+    doc=htmlParse(url)
+    preNode=getNodeSet(doc, "//pre")
+    txt=xmlValue(preNode[[1]]) 
+    els=strsplit(txt,"\r\n")[[1]] 
+    
+    return(els)
+  }
+
+
+ubase="http://www.cherryblossom.org/" #to load website
+womensURLs= paste(ubase, "results/", 1999:2012, "/", 1999:2012, "cucb10m=f.htm", sep="")
+
+#*******************************************************************************************
+length(preNode)
+Q
+#*******************************************************************************************
+
+womensURLs= c("cb99f.htm", "cb003f.htm", 
+              "results/2001/oof_f.html", "results/2002/ooff.htm",
+              "results/2003/CB03-F.HTM", "results/2004/women.htm",
+              "results/2005/CB05-F.htm", "results/2006/women.htm",
+              "results/2007/women.htm", "results/2008/women.htm",
+              "results/2009/09cucb-F.htm", "results/2010/2010cucb10m-f.htm",
+              "results/2011/2011cucb10m-f.htm", "results/2012/2012cucb10m-f.htm"
+              )
+
+
+
+womensURLs= paste(ubase, womensURLs, sep = "")
+
+womensURLs[2] = "C:/Users/student/Desktop/Bryant School Work lenovo/semester 3/Applied analytics 304/cherry blossom/reworked data/womens_2000_notepad.htm"
+
+
+womensURLs[1:3]
+womensTables = lapply(womensURLs, extractResTable)
+names(womensTables) = 1999:2012
+sapply(womensTables, length)
