@@ -1,7 +1,7 @@
 library("XML", lib.loc="~/R/win-library/3.2")
 #2.7 start
 library(XML)
-ubase="http://www.cherryblossom.org/" #to load website
+#ubase="http://www.cherryblossom.org/" #to load website
 url=paste(ubase, "results/2012/2012cucb10m-m.htm", sep="")
 doc = htmlParse(url) #loading page of html
 preNode= getNodeSet(doc, "//pre") #to list of 1 pre
@@ -29,11 +29,11 @@ extractResTable=
 m2012=extractResTable(url)
 identical(m2012,els)
 
-ubase= "http://www.cherryblossom.org/" # reason for split is because we are using different pages from same site
+ubase= "http://www.cherryblossom.org/" # start? reason for split is because we are using different pages from same site
 mensURLs= paste(ubase, "results/", 1999:2012, "/", 1999:2012, "cucb10m=m.htm", sep="") # sep="" overides default of using space as seperator
-menTables = lapply(mensURLs, extractResTable)
-options(error = recover)
-menTables = lapply(mensURLs, extractResTable)
+#menTables = lapply(mensURLs, extractResTable)
+#options(error = recover)
+#menTables = lapply(mensURLs, extractResTable)
 2
 ls ()
 mensURLs
@@ -50,7 +50,7 @@ mensURLs = c("cb99m.htm", "cb003m.htm", "results/2001/oof_m.html",
             )
 
 #*********************************************************************
-womensUrls= c("cb99f.htm", "cb003f.htm", 
+womensURLs= c("cb99f.htm", "cb003f.htm", 
               "results/2001/oof_f.html", "results/2002/ooff.htm",
               "results/2003/CB03-F.HTM", "results/2004/women.htm",
               "results/2005/CB05-F.htm", "results/2006/women.htm",
@@ -99,4 +99,19 @@ save(menTables, file = "CBMenTextTables.rda") #to save data so the program does 
 
 getwd()
 
+write.csv(menTables[1], "menTables1999.txt")
+write.csv(menTables[2], "menTables2000.txt")
+write.csv(menTables[3], "menTables2001.txt")
+write.csv(menTables[4], "menTables2002.txt")
+write.csv(menTables[5], "menTables2003.txt")
+write.csv(menTables[6], "menTables2004.txt")
+write.csv(menTables[7], "menTables2005.txt")
+write.csv(menTables[8], "menTables2006.txt")
+write.csv(menTables[9], "menTables2007.txt")
+write.csv(menTables[10], "menTables2008.txt")
+write.csv(menTables[11], "menTables2009.txt")
+write.csv(menTables[12], "menTables2010.txt")
+write.csv(menTables[13], "menTables2011.txt")
+write.csv(menTables[14], "menTables2012.txt")
 
+m2012 = read.table(file="menTables2012.txt", skip = 8)
