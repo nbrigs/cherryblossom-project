@@ -1,7 +1,7 @@
 library("XML", lib.loc="~/R/win-library/3.2")
 #2.7 start
 library(XML)
-#ubase="http://www.cherryblossom.org/" #to load website
+ubase="http://www.cherryblossom.org/" #to load website
 url=paste(ubase, "results/2012/2012cucb10m-m.htm", sep="")
 doc = htmlParse(url) #loading page of html
 preNode= getNodeSet(doc, "//pre") #to list of 1 pre
@@ -31,9 +31,9 @@ identical(m2012,els)
 
 ubase= "http://www.cherryblossom.org/" # start? reason for split is because we are using different pages from same site
 mensURLs= paste(ubase, "results/", 1999:2012, "/", 1999:2012, "cucb10m=m.htm", sep="") # sep="" overides default of using space as seperator
-#menTables = lapply(mensURLs, extractResTable)
-#options(error = recover)
-#menTables = lapply(mensURLs, extractResTable)
+menTables = lapply(mensURLs, extractResTable)
+options(error = recover)
+menTables = lapply(mensURLs, extractResTable)
 2
 ls ()
 mensURLs
@@ -49,18 +49,7 @@ mensURLs = c("cb99m.htm", "cb003m.htm", "results/2001/oof_m.html",
             "results/2012/2012cucb10m-m.htm"
             )
 
-#*********************************************************************
-womensURLs= c("cb99f.htm", "cb003f.htm", 
-              "results/2001/oof_f.html", "results/2002/ooff.htm",
-              "results/2003/CB03-F.HTM", "results/2004/women.htm",
-              "results/2005/CB05-F.htm", "results/2006/women.htm",
-              "results/2007/women.htm", "results/2008/women.htm",
-              "results/2009/09cucb-F.htm", "results/2010/2010cucb10m-f.htm",
-              "results/2011/2011cucb10m-f.htm", "results/2012/2012cucb10m-f.htm"
-              )
 
-
-#*********************************************************************
 mensURLs= paste(ubase, mensURLs, sep = "")
 mensURLs[11] = "C:/Users/student/Desktop/Bryant School Work lenovo/semester 3/Applied analytics 304/cherry blossom/reworked data/mens_2009_notepad.htm"
 
@@ -99,19 +88,111 @@ save(menTables, file = "CBMenTextTables.rda") #to save data so the program does 
 
 getwd()
 
-write.csv(menTables[1], "menTables1999.txt")
-write.csv(menTables[2], "menTables2000.txt")
-write.csv(menTables[3], "menTables2001.txt")
-write.csv(menTables[4], "menTables2002.txt")
-write.csv(menTables[5], "menTables2003.txt")
-write.csv(menTables[6], "menTables2004.txt")
-write.csv(menTables[7], "menTables2005.txt")
-write.csv(menTables[8], "menTables2006.txt")
-write.csv(menTables[9], "menTables2007.txt")
-write.csv(menTables[10], "menTables2008.txt")
-write.csv(menTables[11], "menTables2009.txt")
-write.csv(menTables[12], "menTables2010.txt")
-write.csv(menTables[13], "menTables2011.txt")
-write.csv(menTables[14], "menTables2012.txt")
+##2.2 start##**************************************************************************************
 
-m2012 = read.table(file="menTables2012.txt", skip = 8)
+write.table(menTables[1], "menTables1999.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+write.table(menTables[2], "menTables2000.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+write.table(menTables[3], "menTables2001.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+write.table(menTables[4], "menTables2002.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+write.table(menTables[5], "menTables2003.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+write.table(menTables[6], "menTables2004.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+write.table(menTables[7], "menTables2005.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+write.table(menTables[8], "menTables2006.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+write.table(menTables[9], "menTables2007.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+write.table(menTables[10], "menTables2008.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+write.table(menTables[11], "menTables2009.txt", quote=FALSE, row.names=FALSE, col.names=FALSE)
+write.table(menTables[12], "menTables2010.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+write.table(menTables[13], "menTables2011.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+write.table(menTables[14], "menTables2012.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+
+#m2012 = read.table(file="menTables2012.txt", skip = 8) #supposed to be error, this line is cancled because it takes so long to load and it is an error anyways
+els = readLines("menTables2012.txt")
+els[1:10]
+
+els2011 = readLines("menTables2011.txt")
+els2011[1:10]
+
+eqIndex = grep("===", els)
+eqIndex
+
+spacerRow = els[eqIndex]
+headerRow = els[eqIndex - 1]
+body = els [ - (1:eqIndex) ]
+headerRow = tolower(headerRow)
+ageStart = regexpr("ag",headerRow)
+ageStart
+age = substr(body, start = ageStart, stop = ageStart + 1)
+head(age)
+summary(as.numeric(age))
+blankLocs = gregexpr(" ", spacerRow)
+blankLocs
+searchLocs = c(0,blankLocs[[1]])
+Values = mapply(substr, list(body),
+                start = searchLocs [ -length(searchLocs)] + 1,
+                stop = searchLocs[ -1 ] -1)
+
+
+findColLocs = function (spacerRow) {
+  spaceLocs = gregexpr(" ", spacerRow) [[1]]
+  rowLength = nchar (spacerRow)                             #might be because of this#
+  
+  if (substring( spacerRow, rowLength, rowLength) != " ") ##Getting error here##
+    return( c(0, spaceLocs, rowLength + 1))
+  else return (c(0, spaceLocs))
+}
+
+
+selectCols = 
+  function(colNames, headerRow, searchLocs)
+   {
+    sapply (colNames,
+           function(name, headerRow, searchLocs)
+           {
+             startPos = regexpr(name, headerRow) [[1]]
+             if (startPos == -1)
+               return( c(NA, NA))
+             index = sum(startPos >= searchLocs)
+             c(searchLocs[index] +1, searchLocs[index + 1] - 1)
+           },
+           headerRow = headerRow, searchLocs = searchLocs)
+  }
+
+searchLocs = findColLocs (spacerRow)
+ageLoc = selectCols("ag", headerRow, searchLocs)
+ages = mapply(substr,list(body) ,
+              start = ageLoc[1, ], stop = ageLoc[2, ])
+summary(as.numeric(ages)) #
+
+shortColNames = c( "name", "home", "ag", "gun", "net", "time")
+locCols = selectCols (shortColNames, headerRow, searchLocs)
+Values = mapply(substr, list(body), start = locCols[1, ],
+                       stop= locCols[2, ])
+class(Values)
+colnames(Values) = shortColNames
+head(Values)
+
+extractVariables = 
+  function(file, varNames =c("name", "home", "ag", "gun", "net", "time"))
+  {
+    eqIndex = grep("===", file)
+    spacerRow = file[eqIndex]
+    headerRow = tolower(file[ eqIndex - 1])
+    body = file[ - (1 : eqIndex) ]
+    searchLocs = findColLocs(spacerRow)
+    locCols = selectCols (varNames, headerRow, searchLocs)
+    Values =  mapply(substr, list(body), start = locCols [1, ],
+                     stop = locCols [2, ])
+    colnames(Values) = varNames
+    invisible(Values)
+  }
+
+
+mfilenames = paste ("menTables",1999:2012,".txt", sep= "")
+menFiles = lapply(mfilenames, readLines)
+names(menFiles) =1999:2012
+
+
+menResMat = lapply(menFiles,extractVariables)
+length(menResMat)
+
+sapply(menResMat, nrow)
