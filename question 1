@@ -3,3 +3,5 @@ read.fwf(file = "menTables2011.txt", widths = c(6,12,7,23,3,21,8,8,6), header = 
 read.fwf(file = "menTables2010.txt", widths = c(6,12,7,23,3,21,8,8,6), header = FALSE, skip = 8)
 read.fwf(file = "menTables2009.txt", widths = c(6,12,7,23,3,21,8,8,6), header = FALSE, skip = 8)
 #working widths so far
+
+read.fwf(file = "menTables2008.txt", widths = c(6,12,7,23,3,19,8,6,8,6,8,6), header = FALSE, skip = 8) #giving error
