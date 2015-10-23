@@ -1,7 +1,10 @@
-read.fwf(file = "menTables2012.txt", widths = c(6,12,7,23,3,21,8,8,6), header = FALSE, skip = 8)
-read.fwf(file = "menTables2011.txt", widths = c(6,12,7,23,3,21,8,8,6), header = FALSE, skip = 8)
-read.fwf(file = "menTables2010.txt", widths = c(6,12,7,23,3,21,8,8,6), header = FALSE, skip = 8)
-read.fwf(file = "menTables2009.txt", widths = c(6,12,7,23,3,21,8,8,6), header = FALSE, skip = 8)
-#working widths so far
+men2012= read.fwf(file = "menTables2012.txt", widths = c(6,12,7,23,3,21,8,8,6), header = FALSE, skip = 8, comment.char = "|")
 
-read.fwf(file = "menTables2008.txt", widths = c(6,12,7,23,3,19,8,6,8,6,8,6), header = FALSE, skip = 8) #giving error
+men2011= read.fwf(file = "menTables2011.txt", widths = c(6,12,7,23,3,21,8,8,8,6), header = FALSE, skip = 8, comment.char = "|")
+men2010= read.fwf(file = "menTables2010.txt", widths = c(6,12,7,23,3,21,8,8,9,6), header = FALSE, skip = 8, comment.char = "|")
+men2009= read.fwf(file = "menTables2009.txt", widths = c(6,12,7,23,3,21,8,9,6), header = FALSE, skip = 8, comment.char = "|")
+men2008= read.fwf(file = "menTables2008.txt", widths = c(6,12,7,23,3,19,8,6,8,6,8,6), header = FALSE, skip = 8, comment.char = "|") #giving error
+men2007= read.fwf(file = "menTables2007.txt", widths = c(6,12,7,23,3,19,8,6,8,6,8,6), header = FALSE, skip = 7, comment.char = "|")
+men2006= read.fwf(file = "menTables2006.txt", widths = c(6,9,7,23,3,16,8,9,6), header = FALSE, skip = 8, comment.char = "|")
+men2005= read.fwf(file = "menTables2005.txt", widths = c(6,10,23,3,19,8,8,6), header = FALSE, skip = 8, comment.char = "|")
+men2004= read.fwf(file = "menTables2004.txt", widths = c(6,10,6,30,3,20,8,8), header = FALSE, skip = 8, comment.char = "|")
