@@ -1,5 +1,4 @@
 men2012= read.fwf(file = "menTables2012.txt", widths = c(6,12,7,23,3,21,8,8,6), header = FALSE, skip = 8, comment.char = "|")
-
 men2011= read.fwf(file = "menTables2011.txt", widths = c(6,12,7,23,3,21,8,8,8,6), header = FALSE, skip = 8, comment.char = "|")
 men2010= read.fwf(file = "menTables2010.txt", widths = c(6,12,7,23,3,21,8,8,9,6), header = FALSE, skip = 8, comment.char = "|")
 men2009= read.fwf(file = "menTables2009.txt", widths = c(6,12,7,23,3,21,8,9,6), header = FALSE, skip = 8, comment.char = "|")
@@ -8,3 +7,8 @@ men2007= read.fwf(file = "menTables2007.txt", widths = c(6,12,7,23,3,19,8,6,8,6,
 men2006= read.fwf(file = "menTables2006.txt", widths = c(6,9,7,23,3,16,8,9,6), header = FALSE, skip = 8, comment.char = "|")
 men2005= read.fwf(file = "menTables2005.txt", widths = c(6,10,23,3,19,8,8,6), header = FALSE, skip = 8, comment.char = "|")
 men2004= read.fwf(file = "menTables2004.txt", widths = c(6,10,6,30,3,20,8,8), header = FALSE, skip = 8, comment.char = "|")
+men2003= read.fwf(file = "menTables2003.txt", widths = c(6,10,6,30,3,20,9,8), header = FALSE, skip = 8, comment.char = "|")
+men2002= read.fwf(file = "menTables2002.txt", widths = c(6,6,22,3,19,8,8), header = FALSE, skip = 3, comment.char = "|")
+men2001= read.fwf(file = "menTables2001.txt", widths = c(6,6,22,3,19,8,7), header = FALSE, skip = 5, comment.char = "|")
+men2000= read.fwf(file = "menTables2000.txt", widths = c(6,10,6,22,3,19,9,8), header = FALSE, skip = 2, comment.char = "|")
+men1999= read.fwf(file = "menTables1999.txt", widths = c(6,10,22,3,19,8,6), header = FALSE, skip = 3, comment.char = "|")
