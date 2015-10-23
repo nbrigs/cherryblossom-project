@@ -2,29 +2,6 @@
 #Completing Q2: Extraction#******************************************
 
 
-grep("^ [[:blank:]]+$", body)
-
-foo <- read.table(file="menTables2012.txt",na.strings=c("", "NA"),sep="\t")
-extractVariables = 
-  function(file, varNames =c("name", "home", "ag", "gun", "net", "time"))
-{
-eqIndex = grep(" ", body)
-spacerRow = file[eqIndex]
-headerRow = tolower(file[ eqIndex - 1])
-body = file[ - (1 : eqIndex) ]
-searchLocs = findColLocs(spacerRow)
-locCols = selectCols (varNames, headerRow, searchLocs)
-Values =  mapply(substr, list(body), start = locCols [1, ],
-                                 +                          stop = locCols [2, ])
-colnames(Values) = varNames
-invisible(Values)
-  }
-
-menTables.df <-menTables.df(" ")
-
-#This is the last thing I tried that replaced blanks w/ NA's and then removed the NA's#
-#I believe this may work#
-foo[foo==""] <- NA
-foo <- na.omit(foo)
-foo <- foo[, colSums(is.na(foo)) ==0]
-is.na(menTables)
+is.na(men2011)  #first part of the code#
+View(men2011) #this is to see which spaces are blank to identify where to specify the code#
+men2011v7 = men2011(!is.na(men2011Mile)) #specific area of where we want the code to find the blanks spaces and then omit those and just show us the dataset without the blank spaces#
